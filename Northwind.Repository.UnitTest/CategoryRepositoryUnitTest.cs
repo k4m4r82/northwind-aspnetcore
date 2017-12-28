@@ -17,7 +17,10 @@ namespace Northwind.Repository.UnitTest
         [TestInitialize]
         public void Init()
         {
-            _context = new DapperContext();
+            var server = "localhost";
+            var port = "5432";
+
+            _context = new DapperContext(server, port);
             _repo = new CategoryRepository(_context);
         }
 

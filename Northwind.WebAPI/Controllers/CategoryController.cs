@@ -17,16 +17,9 @@ namespace Northwind.WebAPI.Controllers
     {
         private IDapperContext _context;
 
-        //public CategoryController(IDapperContext context)
-        //{
-        //    this._context = context;
-        //}
-
-        public CategoryController()
+        public CategoryController(IDapperContext context)
         {
-            //this._context = context;
-
-            _context = new DapperContext();
+            this._context = context;
         }
 
         [HttpGet, Route("get_by_id")]

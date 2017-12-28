@@ -15,14 +15,6 @@ namespace Northwind.WebAPI
 {
     public class Startup
     {
-        //public Startup(IHostingEnvironment env)
-        //{
-        //    Configuration = new ConfigurationBuilder()
-        //        .SetBasePath(env.ContentRootPath)
-        //        .AddEnvironmentVariables()
-        //        .Build();
-        //}
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,8 +32,6 @@ namespace Northwind.WebAPI
             //services.AddMvcCore().AddApiExplorer();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
-
-            /*
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
@@ -51,10 +41,13 @@ namespace Northwind.WebAPI
                     Description = "API to manage Northwind",
                     TermsOfService = "None"
                 });
-            });*/
+            });
+
+            var host = Configuration["DBHOST"] ?? "localhost";
+            var port = Configuration["DBPORT"] ?? "3306";
 
             // Register application services.
-            //services.AddScoped<IDapperContext, DapperContext>();
+            services.AddScoped<IDapperContext>(s => new DapperContext(host, port));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,7 +58,6 @@ namespace Northwind.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            /*
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -73,7 +65,7 @@ namespace Northwind.WebAPI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1 Northwind");
-            });*/
+            });
 
             app.UseMvc();
             //app.UseMvcWithDefaultRoute();

@@ -18,12 +18,8 @@ namespace Northwind.Repository
 
         private readonly string _connectionString;
 
-        public DapperContext()
+        public DapperContext(string server, string port)
         {
-            // 172.17.0.2
-            //var server = "localhost"; // ConfigurationManager.AppSettings["server"];
-            var server = "172.17.0.2"; // ConfigurationManager.AppSettings["server"];
-            var port = "5432"; // ConfigurationManager.AppSettings["port"];
             var dbName = "northwind"; // ConfigurationManager.AppSettings["dbName"];
             var appName = "NorthwindApp";
             var userId = "postgres";
